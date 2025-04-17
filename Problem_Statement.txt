@@ -1,0 +1,10 @@
+Customer Panel
+    ---View product catalog
+    ---Add to cart 
+    ---View/update cart
+    ---Checkout (store order in DB)
+    
+Admin Panel
+    ---Login system (auth table)
+    ---Add/Edit/Delete products
+    ---View order list with basic details

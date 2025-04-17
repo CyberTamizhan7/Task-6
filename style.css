@@ -1,0 +1,124 @@
+body{
+    text-align: center;
+}
+
+.form-container{
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    padding: 15px;
+    width: 95vw;
+    margin-top: 2%;
+}
+
+.form1-container{
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.form2-container{
+    border: 2px solid black;
+    padding: 15px;
+    display: none;
+    border-radius: 12px
+}
+
+.form3-container{
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 12px
+}
+
+.form1-container label,.form1-container button, .form2-container label, .form2-container button, .form3-container label, .form3-container button{
+    display: block;
+    padding: 10px;
+}
+
+.form1-container label, .form2-container label, .form3-container label{
+    text-align: initial;
+    font-family: consolas;
+}
+
+.form1-container input, .form2-container input, .form3-container input{
+    text-align: initial;
+    font-family: consolas;
+    font-size: 20px;
+}
+
+.form1-container button, .form2-container button, .form3-container button{
+    margin: 20px;
+    font-size: 25px;
+    border-radius: 12px;
+    color: white;
+    background-color: black;
+    border: 1px solid black;
+    font-family: consolas;
+    transition: 0.7s;
+}
+
+.hp{
+    font-size: 25px;
+    color: white;
+    background-color: black;
+    padding: 12px;
+    font-weight: bold;
+    font-family: consolas;
+}
+
+.nhp{
+    font-size: 15px;
+    font-family: consolas;
+}
+
+.form1-container label, .form2-container label, .form3-container label{
+    font-size: 20px;
+}
+
+.change_page:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form1-container button:hover, .form2-container button:hover, .form3-container button:hover{
+    transform: scale(1.2);
+}
+
+.hp:hover{
+    color: yellow;
+}
+
+.form1-container button:active, .form2-container button:active, .form3-container button:active{
+    transform: scale(0.7);
+}
+
+
+#head1{
+    font-size: 35px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+#head2{
+    color: white;
+    background-color: blue;
+    border-radius: 12px;
+    padding: 5px;
+    margin-left: 4px;
+    font-family: consolas;
+}
+
+/*
+
+#head1:hover{
+    color: white;
+    background-color: blue;
+}
+
+#head1:hover #head2{
+    color: black;
+    background-color: white;
+}
+    
+*/
+

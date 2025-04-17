@@ -1,0 +1,12 @@
+INSERT INTO products (sku_id, product_id, category_id, name, price) values 
+    ('SKU001', 'P001', 'C001', 'Chess Board', 500),
+    ('SKU002', 'P002', 'C001', 'Chess Clock', 4000),
+    ('SKU003', 'P003', 'C002', '3x3 Rubik\'s Cube', 329),
+    ('SKU004', 'P004', 'C002', '4x4 Rubik\'s Cube', 437),
+    ('SKU005', 'P005', 'C003', 'Laptop', 75000);
+
+    
+INSERT INTO product_categories (Category_ID, Category) VALUES
+    ('C001', 'Chess'),
+    ('C002', 'Rubik\'s Cube'),
+    ('C003', 'Electronics');

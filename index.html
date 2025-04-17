@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Task 6</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="head_section">
+        <h1 id="head1">Quick<strong id="head2">Buy</strong></h1>
+    </div>
+
+    <div class="form-container">
+
+        <div class="form1-container">
+            <form>
+                <p class="hp">Customer Login</p>
+                <label>Username</label>
+                <input id="cl_username" name="c_username" required>
+                <label>Password</label> 
+                <input id="cl_password" name="c_password" required>
+                <button type="button" onclick="customer_login()">Login</button>
+                <p class="nhp">Don't Have An Account? <strong onclick="c_sign_up()" class="change_page">Sign Up!</strong></p>
+            </form>
+        </div>
+
+        <div class="form2-container">
+            <form>
+                <p class="hp">Customer Register</p>
+                <label>Username</label>
+                <input id="cr_username" name="c_username" required>
+                <label>Password</label> 
+                <input id="cr_password" name="c_password" required>
+                <button type="button" onclick="customer_register()">Register</button>
+                <p class="nhp">Already Have An Account? <strong onclick="c_sign_in()" class="change_page">Sign In!</strong></p>
+            </form>
+        </div>
+
+        <div class="form3-container">
+            <form>
+                <p class="hp">Admin Login</p>
+                <label>Username</label>
+                <input id="al_username" name="a_username" required>
+                <label>Password</label> 
+                <input id="al_password" name="a_password" required>
+                <button type="button" onclick="admin_login()">Login</button>
+            </form>
+        </div>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

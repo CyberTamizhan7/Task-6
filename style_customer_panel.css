@@ -1,0 +1,116 @@
+body{
+    text-align: center;
+}
+
+ul{
+    list-style-type: none;
+    position: absolute;
+    right: 80;
+    top: 40;
+    transition: 0.9s;
+    display: none;
+}
+
+ul li{
+    background-color: rgb(243, 240, 240);
+    padding: 15px;
+}
+
+ul li:hover{
+    background-color: rgb(219, 219, 219);
+}
+
+table{
+    border-collapse: collapse;
+}
+
+.container{
+    display: grid;
+    gap: 20px;
+}
+
+.d_product_table caption{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: black;
+    color: white;
+}
+
+.d_product_table thead{
+    position: sticky;
+    z-index: 1;
+    top: 20;
+    color: white;
+    background-color: black;
+}
+
+.d_product_table{
+    grid-column: 1;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    height: 500px;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+}
+
+.d_cart_table{
+    grid-column: 2;
+    grid-row: 2;
+    height: 300px;
+    overflow-y:auto;
+    scrollbar-gutter: stable;
+}
+
+.d_cart_table caption{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: black;
+    color: white;
+}
+
+.d_cart_table thead{
+    position: sticky;
+    z-index: 1;
+    top: 20;
+    color: white;
+    background-color: black;
+}
+
+#head1{
+    font-size: 35px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+#head2{
+    color: white;
+    background-color: blue;
+    border-radius: 12px;
+    padding: 5px;
+    margin-left: 4px;
+    font-family: consolas;
+}
+
+#i_profile_icon{
+    height: 40px;
+    position: absolute;
+    padding-top: 20px;
+    padding-right: 50px;
+    right: 0;
+    top: 0;
+}
+
+#i_profile_icon:hover{
+    cursor: pointer;
+}
+
+#li_logout:hover{
+    cursor:pointer;
+}
+
+#l_total{
+    grid-column: 2;
+    grid-row: 1;
+}
