@@ -65,6 +65,7 @@ function KnockoutJS(){
     }
 
     this.checkout = function(){
+        var username = localStorage.getItem('c_username');
         let name = document.getElementById("i_name").value;
         let age = document.getElementById("i_age").value;
         let address = document.getElementById("ta_address").value;
@@ -89,6 +90,7 @@ function KnockoutJS(){
         console.log("Quantity: ", a_quantity);
 
         parameters = "name="+encodeURIComponent(name)+
+                     "&username="+encodeURIComponent(username)+
                      "&age="+encodeURIComponent(age)+
                      "&address="+encodeURIComponent(address)+
                      "&a_sku_id="+encodeURIComponent(JSON.stringify(a_sku_id))+
@@ -96,6 +98,7 @@ function KnockoutJS(){
                      "&a_product_category="+encodeURIComponent(JSON.stringify(a_product_category))+
                      "&a_product_price="+encodeURIComponent(JSON.stringify(a_product_price))+
                      "&a_quantity="+encodeURIComponent(JSON.stringify(a_quantity));
+                     
 
         var xhr2 = new XMLHttpRequest();
         xhr2.open("POST", "checkout.php", true);
@@ -110,7 +113,7 @@ function KnockoutJS(){
                     alert("Something went wrong");
                 }
                 else{
-                    alert("PHP Rendering: ", checkout_response);
+                    alert(checkout_response);
                 }
             }
         }
