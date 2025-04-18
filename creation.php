@@ -50,11 +50,11 @@
     $sql_ct_orders = "CREATE TABLE IF NOT EXISTS Orders (
                         Order_ID VARCHAR(255) UNIQUE,
                         Customer_ID VARCHAR(255),
-                        SKU_ID VARCHAR(255),
-                        Product_ID VARCHAR(255),
-                        Category_ID VARCHAR(255),
-                        Quantity INT,
-                        Price INT,
+                        SKU_ID JSON,
+                        Product_ID JSON,
+                        Category_ID JSON,
+                        Quantity JSON,
+                        Price JSON,
                         Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         PRIMARY KEY (Order_ID));";
 

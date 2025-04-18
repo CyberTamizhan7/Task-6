@@ -24,6 +24,10 @@ body{
     border-radius: 12px
 }
 
+.form2-container textarea{
+    width: 90%;
+}
+
 .form3-container{
     border: 2px solid black;
     padding: 15px;

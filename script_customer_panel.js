@@ -35,7 +35,7 @@ function KnockoutJS(){
             self.cart.push(new Product(product.sku_id(), product.product_name(), product.product_category(), product.product_price(), product.quantity()));
         }
         else{
-            console.log("Produce Quantity : ", product.quantity());
+            console.log("Product Quantity : ", product.quantity());
             exists.quantity(parseInt(exists.quantity())+parseInt(product.quantity()));
         }
     };
@@ -52,6 +52,69 @@ function KnockoutJS(){
     }
     this.logout = function(){
         window.location.href = "index.html";
+    }
+
+    this.view_checkout = function(){
+        document.getElementsByClassName("pop-up")[0].style.display = "block";
+        document.getElementsByClassName("container")[0].classList.add("blur");
+    }
+
+    this.cancel_checkout = function(){
+        document.getElementsByClassName("pop-up")[0].style.display = "none";
+        document.getElementsByClassName("container")[0].classList.remove("blur");
+    }
+
+    this.checkout = function(){
+        let name = document.getElementById("i_name").value;
+        let age = document.getElementById("i_age").value;
+        let address = document.getElementById("ta_address").value;
+        var a_sku_id = [];
+        var a_product_name = [];
+        var a_product_category = [];
+        var a_quantity = [];
+        var a_product_price = [];
+        self.cart().forEach(item=>{
+            console.log("SKU_ID: ", item.sku_id());
+            a_sku_id.push(item.sku_id());
+            a_product_name.push(item.product_name());
+            a_product_category.push(item.product_category());
+            a_quantity.push(item.quantity());
+            a_product_price.push(item.product_price());
+        })
+
+        console.log("SKU ID: ", a_sku_id);
+        console.log("Product Name: ", a_product_name);
+        console.log("Category Name: ", a_product_category);
+        console.log("Product Price: ", a_product_price);
+        console.log("Quantity: ", a_quantity);
+
+        parameters = "name="+encodeURIComponent(name)+
+                     "&age="+encodeURIComponent(age)+
+                     "&address="+encodeURIComponent(address)+
+                     "&a_sku_id="+encodeURIComponent(JSON.stringify(a_sku_id))+
+                     "&a_product_name="+encodeURIComponent(JSON.stringify(a_product_name))+
+                     "&a_product_category="+encodeURIComponent(JSON.stringify(a_product_category))+
+                     "&a_product_price="+encodeURIComponent(JSON.stringify(a_product_price))+
+                     "&a_quantity="+encodeURIComponent(JSON.stringify(a_quantity));
+
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open("POST", "checkout.php", true);
+        xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr2.onload = function(){
+            if(xhr2.status == 200){
+                var checkout_response = xhr2.responseText;
+                if(checkout_response=="1"){
+                    alert("Date Processing in PHP..");
+                }
+                else if(checkout_response=="0"){
+                    alert("Something went wrong");
+                }
+                else{
+                    alert("PHP Rendering: ", checkout_response);
+                }
+            }
+        }
+        xhr2.send(parameters);
     }
 
     // Fetching Initial Data

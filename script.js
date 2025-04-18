@@ -40,7 +40,14 @@ function customer_login(){
 function customer_register(){
     let c_username = document.getElementById("cr_username").value;
     let c_password = document.getElementById("cr_password").value;
-    let parameters = "c_username="+encodeURIComponent(c_username)+"&c_password="+encodeURIComponent(c_password);
+    let c_name = document.getElementById("cr_name").value;
+    let c_age = document.getElementById("cr_age").value;
+    let c_address = document.getElementById("cr_address").value;
+    let parameters = "c_username="+encodeURIComponent(c_username)+
+                     "&c_password="+encodeURIComponent(c_password)+
+                     "&c_name="+encodeURIComponent(c_name)+
+                     "&c_age="+encodeURIComponent(c_age)+
+                     "&c_address="+encodeURIComponent(c_address);
     var xhr2 = new XMLHttpRequest();
     xhr2.open("POST", "customer_registration.php", true);
     xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -49,6 +56,8 @@ function customer_register(){
             let response = xhr2.responseText;
             if(response=='1'){
                 alert("Customer Registration Successfull!");
+                document.getElementsByClassName("form1-container")[0].style.display = "block";
+                document.getElementsByClassName("form2-container")[0].style.display = "none";
             }
             else if(response=='0'){
                 alert("Username Already Exist!");

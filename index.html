@@ -17,7 +17,7 @@
                 <label>Username</label>
                 <input id="cl_username" name="c_username" required>
                 <label>Password</label> 
-                <input id="cl_password" name="c_password" required>
+                <input type="password" id="cl_password" name="c_password" required>
                 <button type="button" onclick="customer_login()">Login</button>
                 <p class="nhp">Don't Have An Account? <strong onclick="c_sign_up()" class="change_page">Sign Up!</strong></p>
             </form>
@@ -26,6 +26,12 @@
         <div class="form2-container">
             <form>
                 <p class="hp">Customer Register</p>
+                <label>Name</label>
+                <input id="cr_name" name="c_name" required>
+                <label>Age</label>
+                <input type="number" id="cr_age" name="c_age" required>
+                <label>Address</label>
+                <textarea id="cr_address" rows="4"></textarea>
                 <label>Username</label>
                 <input id="cr_username" name="c_username" required>
                 <label>Password</label> 

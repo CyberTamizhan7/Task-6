@@ -66,7 +66,7 @@
                         <td data-bind="text: product_category">Category</td>
                         <td data-bind="text: product_price">Price</td>
                         <td>
-                            <input type="number" data-bind="value: quantity, valueUpdate: 'input'" value=0 min=0 max=1>
+                            <input type="number" data-bind="value: quantity, valueUpdate: 'input'" value=0 min=0 max=10>
                         </td>
                         <td data-bind="text: sub_total">Sub Total</td>
                     </tr>
@@ -74,9 +74,30 @@
             </table>
         </div>
 
-        <p id="l_total">Total : <strong id="total" data-bind="text: total">Total</strong></p>
+        <div class=".d_execute">
+            <p id="l_total">Total : <strong class="total">$</strong><strong class="total" data-bind="text: total">Total</strong></p>
+            <button id="b_checkout" data-bind="click: view_checkout">Check Out</button>
+        </div>
 
     </div>
+
+    <!--Pop Up-->
+    <div class="pop-up">
+        <form>
+            <p id="checkout_head">Checkout Form</p>
+            <label>Name</label>
+            <input id="i_name" name="i_name" placeholder = "Your Name" required>
+            <label>Age</label>
+            <input type="number" id="i_age" name="i_age" placeholder = "Your Age" required>
+            <label>Address</label>
+            <textarea id="ta_address" name="ta_address" rows="4" placeholder="Address" required></textarea>
+            <div class="cc_buttons">
+                <button id="cancel_checkout" type="button" data-bind="click: cancel_checkout">Cancel</button>
+                <button id="checkout" type="button" data-bind="click: checkout">Checkout</button>
+            </div>
+        </form>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
     <script src="script_customer_panel.js"></script>

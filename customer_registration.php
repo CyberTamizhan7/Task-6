@@ -7,6 +7,9 @@
 
         $c_username = $_POST['c_username'];
         $c_password = $_POST['c_password'];
+        $c_name = $_POST['c_name'];
+        $c_age = (int) $_POST['c_age'];
+        $c_address = $_POST['c_address'];
         
         $sql_s_customer = "SELECT * FROM Customer WHERE Username = '$c_username'";
         $result = $conn->query($sql_s_customer);
@@ -26,6 +29,13 @@
             $stmt = $conn->prepare($sql_i_customer);
             $stmt->bind_param("sss", $customer_id, $c_username, $c_password);
             $stmt->execute();
+
+            $sql_i_customer_info = "INSERT INTO Customer_Info 
+                                        (Customer_ID, Name, Username, Age, Address)
+                                        VALUES (?, ?, ?, ?, ?);";
+            $stmt2 = $conn->prepare($sql_i_customer_info);
+            $stmt2->bind_param("sssis", $customer_id, $c_name, $c_username, $c_age, $c_address);
+            $stmt2->execute();
             echo "1";
         }
     }

@@ -9,6 +9,7 @@ ul{
     top: 40;
     transition: 0.9s;
     display: none;
+    z-index: 1;
 }
 
 ul li{
@@ -24,15 +25,56 @@ table{
     border-collapse: collapse;
 }
 
+table thead{
+    font-size: 17px;
+}
+
+table thead th{
+    padding: 10px;
+    font-family: consolas;
+    font-weight: bold;
+}
+
+table td{
+    padding: 5px;
+    font-family: consolas;
+}
+
+caption{
+    font-size: 25px;
+    font-weight: bold;
+    padding: 15px;
+    font-family: consolas;
+}
+
+td button{
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: consolas;
+    transition: 0.7s;
+}
+
+td button:hover{
+    color: yellow;
+    cursor: pointer;
+}
+
+td button:active{
+    transform: scale(0.7);
+}
+
 .container{
     display: grid;
     gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
 }
 
 .d_product_table caption{
     position: sticky;
     top: 0;
-    z-index: 1;
     background-color: black;
     color: white;
 }
@@ -40,23 +82,25 @@ table{
 .d_product_table thead{
     position: sticky;
     z-index: 1;
-    top: 20;
+    top: 58;
     color: white;
     background-color: black;
 }
 
 .d_product_table{
     grid-column: 1;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    height: 500px;
+    grid-row: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    height: 480px;
     overflow-y: auto;
     scrollbar-gutter: stable;
+    border: 3px solid black;
 }
 
 .d_cart_table{
     grid-column: 2;
-    grid-row: 2;
+    grid-row: 1;
     height: 300px;
     overflow-y:auto;
     scrollbar-gutter: stable;
@@ -65,17 +109,59 @@ table{
 .d_cart_table caption{
     position: sticky;
     top: 0;
-    z-index: 1;
     background-color: black;
     color: white;
 }
 
 .d_cart_table thead{
     position: sticky;
-    z-index: 1;
     top: 20;
     color: white;
     background-color: black;
+}
+
+.d_execute{
+    display: grid;
+    grid-column: 2;
+    grid-row: 2;
+    border: 1px solid black;
+    padding: 30px;
+}
+
+.total{
+    color: green;
+}
+
+.pop-up{
+    position: absolute;
+    top: 12%;
+    right: 37%;
+    z-index: 1;
+    border: 2px solid black;
+    background-color: white;
+    display: none;
+    border-radius: 12px;
+    width: 350px;
+    text-align: left;
+    transition: 0.7s ease-in;
+}
+
+.pop-up label{
+    display: block;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.blur{
+    filter: blur(10px);
+}
+
+.cc_buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 20px;
+    gap: 20px;
 }
 
 #head1{
@@ -111,6 +197,66 @@ table{
 }
 
 #l_total{
+    grid-column: 1;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: consolas;
+    color: black;
+}
+
+#b_checkout{
     grid-column: 2;
-    grid-row: 1;
+    font-size: 30px;
+    font-family: consolas;
+    color: white;
+    background-color: blue;
+    border-radius: 12px;
+    border: 1px solid blue;
+    padding: 15px;
+    transition: 0.7s;
+    font-weight: bold;
+}
+
+#b_checkout:hover{
+    transform: scale(1.2);
+}
+
+#b_checkout:active{
+    transform: scale(0.7);
+}
+
+#checkout_head{
+    font-size: 30px;
+    font-style: consolas;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 15px;
+    font-family: consolas;
+}
+
+#i_name, #i_age, #ta_address{
+    width: 90%;
+    font-size: 20px;
+    font-family: consolas;
+    padding-left: 10px;
+}
+
+#cancel_checkout, #checkout{
+    font-size: 25px;
+    color: white;
+    background-color: black;
+    border-radius: 12px;
+    border: 1px solid black;
+    padding: 10px;
+    transition: 0.7s;
+}
+
+#cancel_checkout:hover, #checkout:hover{
+    transform: scale(1.2);
+}
+
+#cancel_checkout:active, #checkout:active{
+    transform: scale(0.7);
 }
