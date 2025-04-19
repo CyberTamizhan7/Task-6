@@ -1,0 +1,142 @@
+<html>
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="style_admin_panel.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="menu">
+            <ul id="ul_menu">
+                <li data-bind="click: view_dashboard">DASHBOARD</li>
+                <li data-bind="click: view_customers">CUSTOMERS</li>
+                <li data-bind="click: view_products">PRODUCTS</li>
+                <li data-bind="click: view_orders">ORDERS</li>
+                <li data-bind="click: view_admins">ADMINS</li>
+            </ul>
+        </div>
+        <div class="header">
+            <h1 id="head1">Quick<strong id="head2">Buy</strong></h1>
+            <img data-bind="click: show_profile" src="Assets/Profile_Icon.png" alt="profile_icon" id="i_profile">
+            <ul id="ul_profile">
+                <li>Username : <strong data-bind="text: a_username">Username</strong></li>
+                <li>Type : <strong data-bind="text: user_type">User Type</strong></li>
+                <li id="logout" data-bind="click: logout">Logout</li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="dashboard">
+                <div class="d_customers">
+                    <h1>Customers</h1>
+                    <p id="n_customers" data-bind="text: n_customers">0</p>
+                </div>
+                <div class="d_products">
+                    <h1>Products</h1>
+                    <p id="n_products" data-bind="text: n_products">0</p>
+                </div>
+                <div class="d_orders">
+                    <h1>Orders</h1>
+                    <p id="n_orders" data-bind="text: n_orders">0</p>
+                </div>
+                <div class="d_admins">
+                    <h1>Admins</h1>
+                    <p id="n_admins" data-bind="text: n_admins">0</p>
+                </div>
+            </div>
+            <div class="customers">
+                <table border="2">
+                    <thead>
+                        <tr>
+                            <th>SNo</th>
+                            <th>C_ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Address</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: customers">
+                        <tr>
+                            <td data-bind="text: $index()+1"></td>
+                            <td data-bind="text: customer_id"></td>
+                            <td data-bind="text: customer_name"></td>
+                            <td data-bind="text: customer_age"></td>
+                            <td data-bind="text: customer_address"></td>
+                            <td data-bind="text: customer_username"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="products">
+                <div class="products_table">
+                    <table border="2">
+                        <thead>
+                            <tr>
+                                <th>SNo</th>
+                                <th>SKU_ID</th>
+                                <th>Product_ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: products">
+                            <tr>
+                                <td data-bind="text: $index()+1"></td>
+                                <td data-bind="text: sku_id"></td>
+                                <td data-bind="text: product_id"></td>
+                                <td>
+                                    <input data-bind="value: product_name">
+                                </td>
+                                <td data-bind="text: product_category"></td>
+                                <td data-bind="text: product_price"></td>
+                                <td>
+                                    <button data-bind="click: $parent.edit_product">EDIT</button>
+                                </td>
+                                <td>
+                                    <button data-bind="click: $parent.delete_product">DELETE</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button data-bind="click: add_product" id="add_product">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="add_product_pop_up">
+        <form>
+            <p>Add Product</p>
+            <label>Product Name</label>
+            <input id="i_product_name" name="i_product_name" required>
+            <label>Category</label>
+            <select id="drop_category" name="drop_category">
+                <option value="books">Books</option>
+                <option value="stationery">Stationery</option>
+                <option value="electronics">Electronics</option>
+                <option value="fitness">Fitness</option>
+                <option value="kitchen">Kitchen</option>
+                <option value="toys">Toys</option>
+                <option value="clothing">Clothing</option>
+                <option value="footwear">Footwear</option>
+                <option value="gaming">Gaming</option>
+                <option value="outdoor">Outdoor</option>
+            </select>
+            <label>Price</label> 
+            <input id="i_product_price" type="number" required>
+            <div class="ap_pop_up_buttons">
+                <button data-bind="click: ap_pop_up_cancel" id="ap_cancel">Cancel</button>
+                <button data-bind="click: save_product" id="ap_save">Save</button>
+            </div>                       
+        </form>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="script_admin_panel.js"></script>
+
+</body>
+</html>

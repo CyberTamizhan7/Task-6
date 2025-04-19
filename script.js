@@ -72,7 +72,32 @@ function customer_register(){
 }
 
 function admin_login(){
-    alert("Admin Login in process");
+    var a_username = document.getElementById("al_username").value;
+    var a_password = document.getElementById("al_password").value;
+    var a_parameters = "username="+encodeURIComponent(a_username)+
+                       "&password="+encodeURIComponent(a_password);
+    var xhr3 = new XMLHttpRequest();
+    xhr3.open("POST", "admin_login_auth.php", true);
+    xhr3.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr3.onload = function(){
+        if(xhr3.status == 200){
+            var a_response = xhr3.responseText;
+            if(a_response=="1"){
+                localStorage.setItem('a_username', a_username);
+                window.location.href = "admin_panel.html";
+            }
+            else if(a_response=="2"){
+                alert("Invalid Password!");
+            }
+            else if(a_response=="0"){
+                alert("Invalid Username!");
+            }
+            else{
+                alert("Unknown Error: Check admin_login_auth.php");
+            }
+        }
+    }
+    xhr3.send(a_parameters);
 }
 
 

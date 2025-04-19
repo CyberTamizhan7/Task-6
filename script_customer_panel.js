@@ -107,7 +107,8 @@ function KnockoutJS(){
             if(xhr2.status == 200){
                 var checkout_response = xhr2.responseText;
                 if(checkout_response=="1"){
-                    alert("Date Processing in PHP..");
+                    alert("Check Out Successfull!");
+                    self.cancel_checkout();
                 }
                 else if(checkout_response=="0"){
                     alert("Something went wrong");

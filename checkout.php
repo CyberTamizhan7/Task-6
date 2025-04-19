@@ -47,7 +47,6 @@
         $sql_s_customer = "SELECT Customer_ID FROM Customer WHERE Username = '$c_username';";
         $result3 = $conn->query($sql_s_customer);
         $row = $result3->fetch_assoc();
-        echo $row['Customer_ID'];
         $customer_id = $row['Customer_ID'];
 
 
@@ -70,7 +69,7 @@
         $stmt = $conn->prepare($sql_i_orders);
         $stmt->bind_param("sssssss", $order_id, $customer_id, $a_sku_id, $a_product_id, $a_category_id, $a_quantity, $a_price);
         $stmt->execute();
-        
+        echo "1";
         
     }
 

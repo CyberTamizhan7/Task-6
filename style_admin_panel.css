@@ -1,0 +1,318 @@
+
+body{
+    text-align: center;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 5fr;
+    width: 100%;
+    height: 100%;
+}
+
+.header{
+    grid-row: 1/2;
+    grid-column: 2/3;
+    background-color: white;
+}
+
+.menu{
+    grid-row: 1/3;
+    grid-column: 1/2;
+    background-color: rgb(0, 0, 99);
+    display: flex;
+    align-items: center;
+}
+
+.content{
+    grid-row: 2/3;
+    grid-column: 2/3;
+    border: 2px solid black;
+
+}
+
+.dashboard{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+}
+
+.d_customers{
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 10% 1% 1% 10%;
+}
+
+.d_products{
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 10% 10% 1% 1%;
+}
+
+.d_orders{
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 1% 1% 10% 10%;
+}
+
+.d_admins{
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 1% 10% 10% 1%;
+}
+
+.d_customers h1, .d_admins h1, .d_orders h1, .d_products h1{
+    font-family: consolas;
+    color: white;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.d_customers h1{
+    background-color: blue;
+}
+
+.d_admins h1{
+    background-color: red;
+}
+
+.d_orders h1{
+    background-color: green;
+}
+
+.d_products h1{
+    background-color: black
+}
+
+.d_customers p, .d_admins p, .d_orders p, .d_products p{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: consolas;
+}
+
+.customers, .products{
+    display: none;
+    max-height: 490px;
+    width: 100%;
+}
+
+.products_table{
+    width: 100%;
+    height: 80%;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 2px solid black;
+}
+
+.products_table table, .customers_table table{
+    width: 100%;
+    border: 2px solid black;
+}
+
+.customers table thead tr th, .products table thead tr th{
+    font-size: 30px;
+    font-family: consolas;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.customers table td, .products table td{
+    font-size: 20px;
+    font-family: consolas;
+    padding: 10px;
+}
+
+.add_product_pop_up{
+    display: none;
+    z-index: 2;
+    position: absolute;
+    top: 20;
+    right: 37%;
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 12px;
+    text-align: left;
+    padding: 15px;
+}
+
+.add_product_pop_up p{
+    font-size: 30px;
+    font-family: consolas;
+    color: white;
+    background-color: black;
+    padding: 15px;
+    text-align: center;
+}
+
+.add_product_pop_up label{
+    display: block;
+    margin: 12px;
+    font-size: 22px;
+    font-family: consolas;
+}
+
+.add_product_pop_up select{
+    display: block;
+    margin: 12px;
+    font-family: consolas;
+    font-size: 22px;
+}
+
+.add_product_pop_up input{
+    font-size: 22px;
+    font-family: consolas;
+    padding: 5px;
+}
+
+.ap_pop_up_buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.ap_pop_up_buttons button{
+    display: block;
+    margin: 20px;
+    font-family: consolas;
+    font-size: 25px;
+    color: white;
+    background-color: black;
+    padding: 5px;
+    transition: 0.7s;
+    border-radius: 12px;
+}
+
+.ap_pop_up_buttons button:hover{
+    transform: scale(1.2);
+}
+
+.ap_pop_up_buttons button:active{
+    transform: scale(0.7);
+}
+
+.blur{
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+#head1{
+    text-align: center;
+    font-family: consolas;
+    font-weight: bold;
+    top: 6%;
+    font-size: 35px;
+}
+
+#head2{
+    background-color: blue;
+    color: white;
+    border: 1px solid blue;
+    border-radius: 12px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
+#i_profile{
+    height: 50px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+#ul_profile{
+    list-style-type: none;
+    position: absolute;
+    top: 9%;
+    right: 8.5%;
+    z-index: 2;
+    display: none;
+}
+
+#ul_profile li{
+    background-color: rgb(234, 234, 234);
+    padding: 10px;
+}
+
+#ul_profile li:hover{
+    background-color: rgb(203, 203, 203);
+}
+
+#logout{
+    text-align: center;
+}
+
+#logout:hover{
+    cursor: pointer;
+}
+
+#i_profile:hover{
+    cursor: pointer;
+}
+
+#ul_menu{
+    list-style-type: none;
+    align-items: center;
+}
+
+#ul_menu li{
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    font-family: consolas;
+    letter-spacing: 5px;
+}
+
+#ul_menu li:hover{
+    background-color: rgb(0, 0, 42);
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+#add_product{
+    background-color: green;
+    color: white;
+    font-size: 50px;
+    padding: 1px;
+    font-weight: bold;
+    z-index: 2;
+    border: 1px solid green;
+    border-radius: 12px;
+    width: 10%;
+    margin-left: 70%;
+    margin-top: 1%;
+    transition: 0.7s;
+}
+
+#add_product:hover{
+    transform: scale(1.1);
+}
+
+#add_product:active{
+    transform: scale(0.7);
+}
+
+#ap_cancel{
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#ap_save{
+    grid-row: 1;
+    grid-column: 2;
+}
