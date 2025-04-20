@@ -119,11 +119,63 @@ function KnockoutJS(){
     }
 
     this.edit_product = function(product){
-        alert("Edit Processing...");
+        var sku_id = product.sku_id();
+        var product_name = product.product_name();
+        var product_price = product.product_price();
+        var paramters = "sku_id="+encodeURIComponent(sku_id)+
+                         "&name="+encodeURIComponent(product_name)+
+                         "&price="+encodeURIComponent(product_price);
+        var xhr5 = new XMLHttpRequest();
+        xhr5.open("POST", "edit_product.php", true);
+        xhr5.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr5.onload = function(){
+            if(xhr5.status == 200){
+                let response5 = xhr5.responseText;
+                if(response5 == "1"){
+                    alert("Edit Successfull!");
+                }
+                else if(response5 == "0"){
+                    alert("No Edit Made");
+                }
+                else if(response5 == "-1"){
+                    alert("Something went wrong.. check edit_product.php");
+                }
+                else if(response5 == "-2"){
+                    alert("Updation SQL Error: Check edit_product.php");
+                }
+                else{
+                    alert("Unknown Error: Check edit_product.php");
+                }
+            }
+        }
+        xhr5.send(paramters);
     }
 
     this.delete_product = function(product){
         self.products.remove(product);
+        var sku_id = product.sku_id();
+        var parameter = "sku_id="+encodeURIComponent(sku_id);
+        var xhr6 = new XMLHttpRequest();
+        xhr6.open("POST", "delete_product.php", true);
+        xhr6.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr6.onload = function(){
+            if(xhr6.status == 200){
+                let response6 = xhr6.responseText;
+                if(response6 == "1"){
+                    alert("Deletion Successfull!");
+                }
+                else if(response6 == "-1"){
+                    alert("Deletion SQL Error: Check delete_product.php");
+                }
+                else if(response6 == "0"){
+                    alert("Something went wrong... Check delete_product.php");
+                }
+                else{
+                    alert("UnknownError: Check delete_product.php");
+                }
+            }
+        }
+        xhr6.send(parameter);
     }
 
     this.add_product = function(){
@@ -150,7 +202,7 @@ function KnockoutJS(){
             if(xhr4.status == 200){
                 response4 = xhr4.responseText;
                 if(response4 == "2"){
-                    alert("Product " + product_name + " Exist Already, please check products table");
+                    alert("Product " + product_name + " Exist Already, Please Refresh the Page and Check the Products Table Again!");
                 }
                 else if(response4 == "1"){
                     alert("Product Added Successfully!");

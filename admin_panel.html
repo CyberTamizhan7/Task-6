@@ -91,18 +91,25 @@
                                     <input data-bind="value: product_name">
                                 </td>
                                 <td data-bind="text: product_category"></td>
-                                <td data-bind="text: product_price"></td>
                                 <td>
-                                    <button data-bind="click: $parent.edit_product">EDIT</button>
+                                    <input data-bind="value: product_price" type="number">
                                 </td>
                                 <td>
-                                    <button data-bind="click: $parent.delete_product">DELETE</button>
+                                    <button id="edit_product" data-bind="click: $parent.edit_product">EDIT</button>
+                                </td>
+                                <td>
+                                    <button id="delete_product" data-bind="click: $parent.delete_product">DELETE</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <button data-bind="click: add_product" id="add_product">+</button>
+            </div>
+            <div class="orders">
+                <div class="orders_table">
+                    
+                </div>
             </div>
         </div>
     </div>
