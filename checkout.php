@@ -6,7 +6,8 @@
         $c_username = $_POST['username'];
         $c_name = $_POST['name'];
         $c_age = $_POST['age'];
-        $c_address = $_POST['address'];
+        $c_shipping_address = $_POST['shipping_address'];
+        $c_billing_address = $_POST['billing_address'];
         $a_sku_id = $_POST['a_sku_id'];
         $a_product_name = $_POST['a_product_name'];
         $a_product_category = $_POST['a_product_category'];
@@ -64,10 +65,10 @@
         $a_sku_id = json_encode($a_sku_id_);
         $a_quantity = json_encode($a_quantity_);
         $a_price = json_encode($a_product_price_);
-        $sql_i_orders = "INSERT INTO Orders (Order_ID, Customer_ID, SKU_ID, Product_ID, Category_ID, Quantity, Price)
-                            VALUES (?, ?, ?, ?, ?, ?, ?);";
+        $sql_i_orders = "INSERT INTO Orders (Order_ID, Customer_ID, SKU_ID, Product_ID, Category_ID, Quantity, Price, Shipping_Address, Billing_Address)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $conn->prepare($sql_i_orders);
-        $stmt->bind_param("sssssss", $order_id, $customer_id, $a_sku_id, $a_product_id, $a_category_id, $a_quantity, $a_price);
+        $stmt->bind_param("sssssssss", $order_id, $customer_id, $a_sku_id, $a_product_id, $a_category_id, $a_quantity, $a_price, $c_shipping_address, $c_billing_address);
         $stmt->execute();
         echo "1";
         

@@ -1,6 +1,6 @@
 function KnockoutJS(){
 
-    function Order(order_id, customer_id, customer_name, customer_username, a_sku_id, a_product_id, a_category_id, a_quantity, a_price, date){
+    function Order(order_id, customer_id, customer_name, customer_username, a_sku_id, a_product_id, a_category_id, a_quantity, a_price, date, shipping_address, billing_address){
         this.order_id = ko.observable(order_id);
         this.customer_id = ko.observable(customer_id);
         this.customer_name = ko.observable(customer_name);
@@ -11,6 +11,8 @@ function KnockoutJS(){
         this.a_quantity = ko.observable(a_quantity);
         this.a_price = ko.observable(a_price);
         this.date = ko.observable(date);
+        this.shipping_address = ko.observable(shipping_address);
+        this.billing_address = ko.observable(billing_address);
     }
 
     function Customer(c_id, name, age, address, username){
@@ -120,7 +122,9 @@ function KnockoutJS(){
                     data[i]['Category_ID'],
                     data[i]['Quantity'],
                     data[i]['Price'],
-                    data[i]['Created_At']
+                    data[i]['Created_At'],
+                    data[i]['Shipping_Address'],
+                    data[i]['Billing_Address']
                 ));
             }
         }
@@ -334,6 +338,8 @@ function KnockoutJS(){
         document.getElementsByClassName("container")[0].classList.add("blur");
         document.getElementsByClassName("view_order")[0].style.display = "block";
         document.getElementById("pop_order_id").innerText = order.order_id();
+        document.getElementById("pop_shipping_address").innerText = order.shipping_address();
+        document.getElementById("pop_billing_address").innerText = order.billing_address();
         console.log("Order ID : " + order.order_id());
         console.log("Customer ID : " + order.customer_id());
         console.log("SKU ID : " + JSON.parse(order.a_sku_id()));

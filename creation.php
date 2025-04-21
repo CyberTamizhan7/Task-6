@@ -55,6 +55,8 @@
                         Category_ID JSON,
                         Quantity JSON,
                         Price JSON,
+                        Shipping_Address VARCHAR(255),
+                        Billing_Address VARCHAR(255),
                         Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         PRIMARY KEY (Order_ID));";
 

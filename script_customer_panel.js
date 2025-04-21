@@ -80,59 +80,72 @@ function KnockoutJS(){
 
     this.checkout = function(){
         var username = localStorage.getItem('c_username');
-        let name = document.getElementById("i_name").value;
-        let age = document.getElementById("i_age").value;
-        let address = document.getElementById("ta_address").value;
-        var a_sku_id = [];
-        var a_product_name = [];
-        var a_product_category = [];
-        var a_quantity = [];
-        var a_product_price = [];
-        self.cart().forEach(item=>{
-            console.log("SKU_ID: ", item.sku_id());
-            a_sku_id.push(item.sku_id());
-            a_product_name.push(item.product_name());
-            a_product_category.push(item.product_category());
-            a_quantity.push(item.quantity());
-            a_product_price.push(item.product_price());
-        })
+        var name = document.getElementById("i_name").value;
+        var age = document.getElementById("i_age").value;
+        var shipping_address = document.getElementById("ta_shipping_address").value;
+        var billing_address = document.getElementById("ta_billing_address").value;
 
-        console.log("SKU ID: ", a_sku_id);
-        console.log("Product Name: ", a_product_name);
-        console.log("Category Name: ", a_product_category);
-        console.log("Product Price: ", a_product_price);
-        console.log("Quantity: ", a_quantity);
+        if(username==""){
+            alert("Username not found, check localstorage");
+        }
 
-        parameters = "name="+encodeURIComponent(name)+
-                     "&username="+encodeURIComponent(username)+
-                     "&age="+encodeURIComponent(age)+
-                     "&address="+encodeURIComponent(address)+
-                     "&a_sku_id="+encodeURIComponent(JSON.stringify(a_sku_id))+
-                     "&a_product_name="+encodeURIComponent(JSON.stringify(a_product_name))+
-                     "&a_product_category="+encodeURIComponent(JSON.stringify(a_product_category))+
-                     "&a_product_price="+encodeURIComponent(JSON.stringify(a_product_price))+
-                     "&a_quantity="+encodeURIComponent(JSON.stringify(a_quantity));
-                     
+        else if(name=="" || age=="" || shipping_address=="" || billing_address==""){
+            alert("Fill Up all the boxes");
+        }
 
-        var xhr2 = new XMLHttpRequest();
-        xhr2.open("POST", "checkout.php", true);
-        xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr2.onload = function(){
-            if(xhr2.status == 200){
-                var checkout_response = xhr2.responseText;
-                if(checkout_response=="1"){
-                    alert("Check Out Successfull!");
-                    self.cancel_checkout();
-                }
-                else if(checkout_response=="0"){
-                    alert("Something went wrong");
-                }
-                else{
-                    alert(checkout_response);
+        else{
+            var a_sku_id = [];
+            var a_product_name = [];
+            var a_product_category = [];
+            var a_quantity = [];
+            var a_product_price = [];
+            self.cart().forEach(item=>{
+                console.log("SKU_ID: ", item.sku_id());
+                a_sku_id.push(item.sku_id());
+                a_product_name.push(item.product_name());
+                a_product_category.push(item.product_category());
+                a_quantity.push(item.quantity());
+                a_product_price.push(item.product_price());
+            })
+
+            console.log("SKU ID: ", a_sku_id);
+            console.log("Product Name: ", a_product_name);
+            console.log("Category Name: ", a_product_category);
+            console.log("Product Price: ", a_product_price);
+            console.log("Quantity: ", a_quantity);
+
+            parameters = "name="+encodeURIComponent(name)+
+                        "&username="+encodeURIComponent(username)+
+                        "&age="+encodeURIComponent(age)+
+                        "&shipping_address="+encodeURIComponent(shipping_address)+
+                        "&billing_address="+encodeURIComponent(billing_address)+
+                        "&a_sku_id="+encodeURIComponent(JSON.stringify(a_sku_id))+
+                        "&a_product_name="+encodeURIComponent(JSON.stringify(a_product_name))+
+                        "&a_product_category="+encodeURIComponent(JSON.stringify(a_product_category))+
+                        "&a_product_price="+encodeURIComponent(JSON.stringify(a_product_price))+
+                        "&a_quantity="+encodeURIComponent(JSON.stringify(a_quantity));
+                        
+
+            var xhr2 = new XMLHttpRequest();
+            xhr2.open("POST", "checkout.php", true);
+            xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr2.onload = function(){
+                if(xhr2.status == 200){
+                    var checkout_response = xhr2.responseText;
+                    if(checkout_response=="1"){
+                        alert("Check Out Successfull!");
+                        self.cancel_checkout();
+                    }
+                    else if(checkout_response=="0"){
+                        alert("Something went wrong");
+                    }
+                    else{
+                        alert(checkout_response);
+                    }
                 }
             }
+            xhr2.send(parameters);
         }
-        xhr2.send(parameters);
     }
 
     // Fetching Initial Data

@@ -37,7 +37,7 @@
         }
 
         else if($code=='O'){
-            $sql_s_orders = "SELECT Order_ID, a.Customer_ID, b.Name, b.Username, SKU_ID, Product_ID, Category_ID, Quantity, Price, a.Created_At
+            $sql_s_orders = "SELECT Order_ID, a.Customer_ID, b.Name, b.Username, SKU_ID, Product_ID, Category_ID, Quantity, Price, a.Created_At, Shipping_Address, Billing_Address
                              FROM Orders a
                              JOIN Customer_Info b
                              ON a.Customer_ID = b.Customer_ID;";
