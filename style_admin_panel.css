@@ -99,10 +99,25 @@ body{
     font-family: consolas;
 }
 
-.customers, .products{
+.customers{
     display: none;
     max-height: 490px;
-    width: 100%;
+}
+
+.products{
+    display: none;
+    max-height: 490px;
+    width: 88%;
+}
+
+.orders{
+    display: none;
+    max-height: 490px;
+}
+
+.admins{
+    display: none;
+    max-height: 490px;
 }
 
 .products_table{
@@ -113,12 +128,78 @@ body{
     border: 2px solid black;
 }
 
-.products_table table, .customers_table table{
+.customers_table{
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 2px solid black;
+}
+
+.orders_table{
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 2px solid black
+}
+
+.admins_table{
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 2px solid black;
+}
+
+.admins_table table{
+    border-collapse: collapse;
+    margin-left: 15%;
+    margin-top: 5%;
+}
+
+.admins_table table th{
+    font-family: consolas;
+    font-size: 30px;
+    color: white;
+    background-color: black;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.admins_table table td{
+    font-family: consolas;
+    font-size: 20px;
+    color: black;
+    padding: 5px;
+}
+
+.orders_table button{
+    font-size: 20px;
+    font-family: consolas;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid green;
+    transition: 0.4s;
+}
+
+.orders_table button:hover{
+    transform: scale(1.2);
+}
+
+.orders_table button:active{
+    transform: scale(0.7);
+}
+
+.products_table table, .customers_table table, .orders_table_table{
     width: 100%;
     border: 2px solid black;
 }
 
-.customers table thead tr th, .products table thead tr th{
+.customers table thead tr th, .products table thead tr th, .orders_table table thead tr th{
     font-size: 30px;
     font-family: consolas;
     font-weight: bold;
@@ -130,7 +211,7 @@ body{
     z-index: 1;
 }
 
-.customers table td, .products table td{
+.customers table td, .products table td, .orders_table table td{
     font-size: 20px;
     font-family: consolas;
     padding: 10px;
@@ -202,6 +283,67 @@ body{
 
 .ap_pop_up_buttons button:active{
     transform: scale(0.7);
+}
+
+.view_order{
+    border: 2px solid black;
+    border-radius: 12px;
+    display: none;
+    position: absolute;
+    top: 5%;
+    right: 20%;
+    background-color: white;
+}
+
+.view_order p{
+    font-family: consolas;
+    font-size: 25px;
+}
+
+.view_order button{
+    font-family: consolas;
+    font-size: 25px;
+    color: white;
+    background-color: black;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid black;
+    transition: 0.7s;
+    margin: 10px;
+}
+
+.view_order button:hover{
+    transform: scale(1.2);
+}
+
+.view_order button:active{
+    transform: scale(0.7);
+}
+
+.view_order_table{
+    max-height: 275px;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 2px solid black;
+}
+
+.view_order_table table{
+    border-collapse: collapse;
+}
+
+.view_order_table table th{
+    font-size: 20px;
+    font-family: consolas;
+    color: white;
+    background-color: black;
+    padding: 5px;
+}
+
+.view_order_table table td{
+    font-size: 18px;
+    font-family: consolas;
+    color: black;
+    padding: 5px;
 }
 
 .blur{

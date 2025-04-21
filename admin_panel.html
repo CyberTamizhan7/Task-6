@@ -44,28 +44,30 @@
                 </div>
             </div>
             <div class="customers">
-                <table border="2">
-                    <thead>
-                        <tr>
-                            <th>SNo</th>
-                            <th>C_ID</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Address</th>
-                            <th>Username</th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: customers">
-                        <tr>
-                            <td data-bind="text: $index()+1"></td>
-                            <td data-bind="text: customer_id"></td>
-                            <td data-bind="text: customer_name"></td>
-                            <td data-bind="text: customer_age"></td>
-                            <td data-bind="text: customer_address"></td>
-                            <td data-bind="text: customer_username"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="customers_table">
+                    <table border="2">
+                        <thead>
+                            <tr>
+                                <th>SNo</th>
+                                <th>C_ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Address</th>
+                                <th>Username</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: customers">
+                            <tr>
+                                <td data-bind="text: $index()+1"></td>
+                                <td data-bind="text: customer_id"></td>
+                                <td data-bind="text: customer_name"></td>
+                                <td data-bind="text: customer_age"></td>
+                                <td data-bind="text: customer_address"></td>
+                                <td data-bind="text: customer_username"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="products">
                 <div class="products_table">
@@ -108,7 +110,54 @@
             </div>
             <div class="orders">
                 <div class="orders_table">
-                    
+                    <table border="2">
+                        <thead>
+                            <tr>
+                                <th>SNo</th>
+                                <th>Order_ID</th>
+                                <th>Customer_ID</th>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Date</th>
+                                <th>View Order</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: orders">
+                            <tr>
+                                <td data-bind="text: $index()+1"></td>
+                                <td data-bind="text: order_id"></td>
+                                <td data-bind="text: customer_id"></td>
+                                <td data-bind="text: customer_name"></td>
+                                <td data-bind="text: customer_username"></td>
+                                <td data-bind="text: date"></td>
+                                <td>
+                                    <button id="view_order" data-bind="click: $parent.view_order">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="admins">
+                <div class="admins_table">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>SNo</th>
+                                <th>Admin ID</th>
+                                <th>Username</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: admins">
+                            <tr>
+                                <td data-bind="text: $index()+1"></td>
+                                <td data-bind="text: admin_id"></td>
+                                <td data-bind="text: username"></td>
+                                <td data-bind="text: created_at"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -139,6 +188,44 @@
                 <button data-bind="click: save_product" id="ap_save">Save</button>
             </div>                       
         </form>
+    </div>
+
+    <div class="view_order">
+        <h1>Order Info</h1>
+        <p>Order ID : <strong id="pop_order_id"></strong></p>
+        <div class="view_order_table">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>SNo</th>
+                        <th>SKU_ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Sub Total</th>
+                    </tr>
+                </thead>
+                
+                <tbody data-bind="foreach: subOrder">
+                    <tr>
+                        <td data-bind="text: $index()+1"></td>
+                        <td data-bind="text: sku_id"></td>
+                        <td data-bind="text: name"></td>
+                        <td data-bind="text: category"></td>
+                        <td data-bind="text: quantity"></td>
+                        <td data-bind="text: price"></td>
+                        <td data-bind="text: subTotal"></td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+
+        <p>Total : $<strong data-bind="text: total"></strong></p>
+
+        <button data-bind="click: back_view_order">BACK</button>
+    
     </div>
 
     

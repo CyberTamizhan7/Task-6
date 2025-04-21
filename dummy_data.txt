@@ -1,12 +1,74 @@
-INSERT INTO products (sku_id, product_id, category_id, name, price) values 
-    ('SKU001', 'P001', 'C001', 'Chess Board', 500),
-    ('SKU002', 'P002', 'C001', 'Chess Clock', 4000),
-    ('SKU003', 'P003', 'C002', '3x3 Rubik\'s Cube', 329),
-    ('SKU004', 'P004', 'C002', '4x4 Rubik\'s Cube', 437),
-    ('SKU005', 'P005', 'C003', 'Laptop', 75000);
-
-    
+-- Insert product categories
 INSERT INTO product_categories (Category_ID, Category) VALUES
     ('C001', 'Chess'),
-    ('C002', 'Rubik\'s Cube'),
-    ('C003', 'Electronics');
+    ('C002', 'Rubik\'s Cubes'),
+    ('C003', 'Electronics'),
+    ('C004', 'Board Games'),
+    ('C005', 'Books'),
+    ('C006', 'Fitness'),
+    ('C007', 'Stationery'),
+    ('C008', 'Toys'),
+    ('C009', 'Musical Instruments'),
+    ('C010', 'Kitchen Appliances');
+
+-- Insert products
+INSERT INTO products (sku_id, product_id, category_id, name, price) VALUES
+    ('SKU001', 'P001', 'C001', 'Chess Board', 500),
+    ('SKU002', 'P002', 'C001', 'Chess Clock', 4000),
+    ('SKU003', 'P003', 'C001', 'Wooden Chess Pieces', 1500),
+    ('SKU004', 'P004', 'C001', 'Magnetic Chess Set', 899),
+    ('SKU005', 'P005', 'C001', 'Tournament Chess Set', 2300),
+
+    ('SKU006', 'P006', 'C002', '3x3 Rubik\'s Cube', 329),
+    ('SKU007', 'P007', 'C002', '4x4 Rubik\'s Cube', 437),
+    ('SKU008', 'P008', 'C002', 'Mirror Cube', 499),
+    ('SKU009', 'P009', 'C002', 'Pyraminx', 349),
+    ('SKU010', 'P010', 'C002', 'Megaminx', 599),
+
+    ('SKU011', 'P011', 'C003', 'Laptop', 75000),
+    ('SKU012', 'P012', 'C003', 'Bluetooth Headphones', 2499),
+    ('SKU013', 'P013', 'C003', 'Smartphone', 19999),
+    ('SKU014', 'P014', 'C003', 'Mechanical Keyboard', 3999),
+    ('SKU015', 'P015', 'C003', 'Wireless Mouse', 1199),
+
+    ('SKU016', 'P016', 'C004', 'Catan Board Game', 3200),
+    ('SKU017', 'P017', 'C004', 'Monopoly Classic', 1400),
+    ('SKU018', 'P018', 'C004', 'Scrabble', 1350),
+    ('SKU019', 'P019', 'C004', 'Risk', 2750),
+    ('SKU020', 'P020', 'C004', 'Ticket to Ride', 2999),
+
+    ('SKU021', 'P021', 'C005', '1984 by George Orwell', 499),
+    ('SKU022', 'P022', 'C005', 'Sapiens by Yuval Harari', 599),
+    ('SKU023', 'P023', 'C005', 'The Alchemist', 349),
+    ('SKU024', 'P024', 'C005', 'Atomic Habits', 399),
+    ('SKU025', 'P025', 'C005', 'Deep Work', 450),
+
+    ('SKU026', 'P026', 'C006', 'Dumbbell Set (10kg)', 1299),
+    ('SKU027', 'P027', 'C006', 'Yoga Mat', 899),
+    ('SKU028', 'P028', 'C006', 'Kettlebell (8kg)', 999),
+    ('SKU029', 'P029', 'C006', 'Resistance Bands', 699),
+    ('SKU030', 'P030', 'C006', 'Foam Roller', 649),
+
+    ('SKU031', 'P031', 'C007', 'Gel Pen Pack (10)', 149),
+    ('SKU032', 'P032', 'C007', 'Notebook (A5)', 99),
+    ('SKU033', 'P033', 'C007', 'Marker Set', 199),
+    ('SKU034', 'P034', 'C007', 'Stapler', 129),
+    ('SKU035', 'P035', 'C007', 'Sticky Notes', 89),
+
+    ('SKU036', 'P036', 'C008', 'Lego City Set', 3999),
+    ('SKU037', 'P037', 'C008', 'Remote Control Car', 1499),
+    ('SKU038', 'P038', 'C008', 'Barbie Doll', 799),
+    ('SKU039', 'P039', 'C008', 'Plush Teddy Bear', 599),
+    ('SKU040', 'P040', 'C008', 'Toy Train Set', 899),
+
+    ('SKU041', 'P041', 'C009', 'Acoustic Guitar', 7499),
+    ('SKU042', 'P042', 'C009', 'Digital Piano', 19999),
+    ('SKU043', 'P043', 'C009', 'Violin (Beginner)', 4999),
+    ('SKU044', 'P044', 'C009', 'Guitar Picks (Pack of 5)', 199),
+    ('SKU045', 'P045', 'C009', 'Ukulele', 2999),
+
+    ('SKU046', 'P046', 'C010', 'Electric Kettle', 999),
+    ('SKU047', 'P047', 'C010', 'Air Fryer', 5499),
+    ('SKU048', 'P048', 'C010', 'Blender', 2899),
+    ('SKU049', 'P049', 'C010', 'Toaster', 1899),
+    ('SKU050', 'P050', 'C010', 'Rice Cooker', 3499);

@@ -1,5 +1,18 @@
 function KnockoutJS(){
 
+    function Order(order_id, customer_id, customer_name, customer_username, a_sku_id, a_product_id, a_category_id, a_quantity, a_price, date){
+        this.order_id = ko.observable(order_id);
+        this.customer_id = ko.observable(customer_id);
+        this.customer_name = ko.observable(customer_name);
+        this.customer_username = ko.observable(customer_username);
+        this.a_sku_id = ko.observable(a_sku_id);
+        this.a_product_id = ko.observable(a_product_id);
+        this.a_category_id = ko.observable(a_category_id);
+        this.a_quantity = ko.observable(a_quantity);
+        this.a_price = ko.observable(a_price);
+        this.date = ko.observable(date);
+    }
+
     function Customer(c_id, name, age, address, username){
         this.customer_id = ko.observable(c_id);
         this.customer_name = ko.observable(name);
@@ -16,11 +29,36 @@ function KnockoutJS(){
         this.product_price = ko.observable(price);
     }
 
+    function SubOrder(sku_id, name, category, quantity, price, subTotal){
+        this.sku_id = ko.observable(sku_id);
+        this.name = ko.observable(name);
+        this.category = ko.observable(category);
+        this.quantity = ko.observable(quantity);
+        this.price = ko.observable(price);
+        this.subTotal = ko.observable(subTotal);
+    }
+
+    function Admin(admin_id, username, created_at){
+        this.admin_id = ko.observable(admin_id);
+        this.username = ko.observable(username);
+        this.created_at = ko.observable(created_at);
+    }
+
     const self = this;
     this.customers = ko.observableArray([]);
     this.products = ko.observableArray([]);
     this.admins = ko.observableArray([]);
     this.orders = ko.observableArray([]);
+
+    this.subOrder = ko.observableArray([]);
+
+    this.total = ko.computed(function(){
+        var sum=0;
+        ko.utils.arrayForEach(self.subOrder(),function(item){
+            sum += item.subTotal();
+        })
+        return sum;
+    })
 
     // Fetching Customers
     var xhr2 = new XMLHttpRequest();
@@ -29,6 +67,7 @@ function KnockoutJS(){
     xhr2.onload = function(){
         if(xhr2.status == 200){
             let data = JSON.parse(xhr2.responseText);
+            console.log("Customers Data");
             console.log(data);
             for(let i=0;i<data.length;i++){
                 self.customers.push(new Customer(
@@ -63,6 +102,51 @@ function KnockoutJS(){
     }
     xhr3.send("code="+encodeURIComponent('P'));
 
+    // Fetching Orders
+    var xhr7 = new XMLHttpRequest();
+    xhr7.open("POST", "fetch_initial_admin.php", true);
+    xhr7.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr7.onload = function(){
+        if(xhr7.status == 200){
+            let data = JSON.parse(xhr7.responseText);
+            for(let i=0;i<data.length;i++){
+                self.orders.push(new Order(
+                    data[i]['Order_ID'],
+                    data[i]['Customer_ID'],
+                    data[i]['Name'],
+                    data[i]['Username'],
+                    data[i]['SKU_ID'],
+                    data[i]['Product_ID'],
+                    data[i]['Category_ID'],
+                    data[i]['Quantity'],
+                    data[i]['Price'],
+                    data[i]['Created_At']
+                ));
+            }
+        }
+    }
+    xhr7.send("code="+encodeURIComponent('O'));
+
+    // Fetching Admins
+    var xhr9 = new XMLHttpRequest();
+    xhr9.open("POST", "fetch_initial_admin.php", true);
+    xhr9.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr9.onload = function(){
+        if(xhr9.status == 200){
+            let data = JSON.parse(xhr9.responseText);
+            console.log("Admin Data");
+            console.log(data);
+            for(let i=0;i<data.length;i++){
+                self.admins.push(new Admin(
+                    data[i]['Admin_ID'],
+                    data[i]['Username'],
+                    data[i]['Created_At']
+                ))
+            }
+        }
+    }
+    xhr9.send("code="+encodeURIComponent('A'));
+
 
     var a_username = localStorage.getItem('a_username');
     this.a_username = ko.observable(a_username);
@@ -90,32 +174,40 @@ function KnockoutJS(){
         document.getElementsByClassName("dashboard")[0].style.display = "grid";
         document.getElementsByClassName("customers")[0].style.display = "none";
         document.getElementsByClassName("products")[0].style.display = "none";
+        document.getElementsByClassName("orders")[0].style.display = "none";
+        document.getElementsByClassName("admins")[0].style.display = "none";
     }
 
     this.view_customers = function(){
         document.getElementsByClassName("dashboard")[0].style.display = "none";
         document.getElementsByClassName("customers")[0].style.display = "block";
         document.getElementsByClassName("products")[0].style.display = "none";
+        document.getElementsByClassName("orders")[0].style.display = "none";
+        document.getElementsByClassName("admins")[0].style.display = "none";
     }
 
     this.view_products = function(){
         document.getElementsByClassName("dashboard")[0].style.display = "none";
         document.getElementsByClassName("customers")[0].style.display = "none";
         document.getElementsByClassName("products")[0].style.display = "block";
+        document.getElementsByClassName("orders")[0].style.display = "none";
+        document.getElementsByClassName("admins")[0].style.display = "none";
     }
 
     this.view_orders = function(){
         document.getElementsByClassName("dashboard")[0].style.display = "none";
         document.getElementsByClassName("customers")[0].style.display = "none";
         document.getElementsByClassName("products")[0].style.display = "none";
-        alert("Orders Table in progress...");
+        document.getElementsByClassName("orders")[0].style.display = "block";
+        document.getElementsByClassName("admins")[0].style.display = "none";
     }
 
     this.view_admins = function(){
         document.getElementsByClassName("dashboard")[0].style.display = "none";
         document.getElementsByClassName("customers")[0].style.display = "none";
         document.getElementsByClassName("products")[0].style.display = "none";
-        alert("Admins Table in progress...");
+        document.getElementsByClassName("orders")[0].style.display = "none";
+        document.getElementsByClassName("admins")[0].style.display = "block";
     }
 
     this.edit_product = function(product){
@@ -223,6 +315,44 @@ function KnockoutJS(){
             }
         }
         xhr4.send(parameters);
+    }
+
+    this.view_order = function(order){
+        self.subOrder([]);
+        document.getElementsByClassName("container")[0].classList.add("blur");
+        document.getElementsByClassName("view_order")[0].style.display = "block";
+        document.getElementById("pop_order_id").innerText = order.order_id();
+        console.log("Order ID : " + order.order_id());
+        console.log("Customer ID : " + order.customer_id());
+        console.log("SKU ID : " + JSON.parse(order.a_sku_id()));
+        console.log("Quantity : " + JSON.parse(order.a_quantity()));
+        var xhr8 = new XMLHttpRequest();
+        xhr8.open("POST", "fetch_sub_order.php", true);
+        xhr8.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr8.onload = function(){
+            if(xhr8.status == 200){
+                let data = JSON.parse(xhr8.responseText);
+                console.log(data);
+                console.log(data[0]);
+                console.log(data[0]['SKU_ID']);
+                for(let i=0;i<data.length;i++){
+                    self.subOrder.push(new SubOrder(
+                        data[i]['SKU_ID'],
+                        data[i]['Name'],
+                        data[i]['Category'],
+                        JSON.parse(order.a_quantity())[i],
+                        data[i]['Price'],
+                        parseInt(JSON.parse(order.a_quantity())[i]) * parseInt(data[i]['Price']),
+                    ));
+                }
+            }
+        }
+        xhr8.send(JSON.stringify({ array1: JSON.parse(order.a_sku_id()), array2: JSON.parse(order.a_quantity())}));
+    }
+
+    this.back_view_order = function(){
+        document.getElementsByClassName("container")[0].classList.remove("blur");
+        document.getElementsByClassName("view_order")[0].style.display = "none";
     }
     
 }
