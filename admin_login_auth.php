@@ -1,5 +1,10 @@
 <?php
 
+    session_start();
+
+    $_SESSION['username'] = "";
+    $_SESSION['loggedIn'] = false;
+
     include('connection.php');
     include('creation.php');
 
@@ -12,6 +17,8 @@
         if($result1->num_rows>0){
             $result2 = $conn->query($sql_s_admin2);
             if($result2->num_rows>0){
+                $_SESSION['username'] = $username;
+                $_SESSION['loggedIn'] = true;
                 echo "1";
             }
             else{

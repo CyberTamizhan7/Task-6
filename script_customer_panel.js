@@ -41,6 +41,20 @@ function KnockoutJS(){
     };
 
     this.c_username = ko.observable(username);
+
+    var xhr10 = new XMLHttpRequest();
+    xhr10.open("POST", "fetch_session_username.php", true);
+    xhr10.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr10.onload = function(){
+        if(xhr10.status == 200){
+            let response10 = xhr10.responseText;
+            console.log("Customer Username : " + response10);
+            self.c_username(response10);
+        }
+    }
+    xhr10.send("code="+encodeURIComponent('C'));
+
+    
     this.view_profile = function(){
         clickCounter++;
         if(clickCounter%2==1){
@@ -51,7 +65,7 @@ function KnockoutJS(){
         }
     }
     this.logout = function(){
-        window.location.href = "index.html";
+        window.location.href = "logout.php";
     }
 
     this.view_checkout = function(){

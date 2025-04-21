@@ -147,12 +147,24 @@ function KnockoutJS(){
     }
     xhr9.send("code="+encodeURIComponent('A'));
 
-
     var a_username = localStorage.getItem('a_username');
     this.a_username = ko.observable(a_username);
+
+    var xhr11 = new XMLHttpRequest();
+    xhr11.open("POST", "fetch_session_username.php", true);
+    xhr11.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr11.onload = function(){
+        if(xhr11.status == 200){
+            let response11 = xhr11.responseText;
+            console.log("Admin Username : " + response11);
+            self.a_username(response11);
+        }
+    }
+    xhr11.send("code="+encodeURIComponent('A'));
+
     this.user_type = ko.observable("Admin");
     this.logout = function(){
-        window.location.href = "index.html";
+        window.location.href = "logout.php";
     }
     var clickCounter = 0;
     this.show_profile = function(){

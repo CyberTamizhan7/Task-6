@@ -101,5 +101,14 @@ function admin_login(){
 }
 
 
+function redirect_to_customer(){
+    window.location.href = "index.html";
+}
+
+function redirect_to_admin(){
+    window.location.href = "admin_login.html";
+}
+
+
 
 

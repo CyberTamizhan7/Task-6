@@ -2,9 +2,6 @@
 <head>
     <title>Task 6</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        window.location.href="customer_login.php";
-    </script>
 </head>
 <body>
     
@@ -24,6 +21,7 @@
                 <button type="button" onclick="customer_login()">Login</button>
                 <p class="nhp">Don't Have An Account? <strong onclick="c_sign_up()" class="change_page">Sign Up!</strong></p>
             </form>
+            <button onclick="redirect_to_admin()">Admin Login</button>
         </div>
 
         <div class="form2-container">
@@ -45,8 +43,6 @@
         </div>
         
     </div>
-
-    <p>This Page Never Shows</p>
 
     <script src="script.js"></script>
 </body>

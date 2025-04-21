@@ -1,5 +1,10 @@
 <?php
 
+    session_start();
+
+    $_SESSION['c_username'] = "";
+    $_SESSION['c_loggedIn'] = false;
+
     include('connection.php');
     include('creation.php');
 
@@ -16,6 +21,8 @@
         if($result->num_rows > 0){
             $result2 = $conn->query($sql_s_customer_2);
             if($result2->num_rows > 0){
+                $_SESSION['c_username'] = $c_username;
+                $_SESSION['c_loggedIn'] = true;
                 echo "1";
             }
             else{
