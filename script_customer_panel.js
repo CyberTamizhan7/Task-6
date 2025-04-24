@@ -28,15 +28,55 @@ function KnockoutJS(){
         return totalAmount;
     });
 
-    this.add_to_cart = function(product){
-        let exists = self.cart().find(p=>p.sku_id() === product.sku_id());
-        console.log("Exists : ", exists);
-        if(!exists){
-            self.cart.push(new Product(product.sku_id(), product.product_name(), product.product_category(), product.product_price(), product.quantity()));
+    this.decrease_quantity = function(product){
+        if(product.quantity()==0){
+            alert("Invalid: -ve Quantities");
         }
         else{
-            console.log("Product Quantity : ", product.quantity());
-            exists.quantity(parseInt(exists.quantity())+parseInt(product.quantity()));
+            product.quantity(product.quantity()-1);
+        }
+    }
+
+    this.increase_quantity = function(product){
+        let max_product = 10;
+        if(product.quantity()==max_product){
+            alert("Invalid: Max Product Stock Count Reached (" + max_product.toString() + ")");
+        }
+        else{
+            product.quantity(product.quantity()+1);
+        }
+    }
+
+    this.add_to_cart = function(product){
+        if(product.quantity() == 0){
+            alert("Error: Cannot Add 0 Stock to Cart!");
+        }
+        else{
+            let exists = self.cart().find(p=>p.sku_id() === product.sku_id());
+            console.log("Exists : ", exists);
+            if(!exists){
+                var parameters = "customer_username="+encodeURIComponent(self.c_username())+
+                                "&sku_id="+encodeURIComponent(product.sku_id())+
+                                "&product_name="+encodeURIComponent(product.product_name())+
+                                "&category="+encodeURIComponent(product.product_category())+
+                                "&price="+encodeURIComponent(product.product_price())+
+                                "&quantity="+encodeURIComponent(product.quantity());
+                var xhr12 = new XMLHttpRequest();
+                xhr12.open("POST", "save_cart.php", true);
+                xhr12.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr12.onload = function(){
+                    if(xhr12.status == 200){
+                        var response12 = xhr12.responseText;
+                        console.log("Cart DB Insertion Status: " + response12);
+                    }
+                }
+                xhr12.send(parameters);
+                self.cart.push(new Product(product.sku_id(), product.product_name(), product.product_category(), product.product_price(), product.quantity()));
+            }
+            else{
+                console.log("Product Quantity : ", product.quantity());
+                exists.quantity(parseInt(exists.quantity())+parseInt(product.quantity()));
+            }
         }
     };
 
@@ -68,89 +108,33 @@ function KnockoutJS(){
         window.location.href = "logout.php";
     }
 
-    this.view_checkout = function(){
-        document.getElementsByClassName("pop-up")[0].style.display = "block";
-        document.getElementsByClassName("container")[0].classList.add("blur");
-    }
-
-    this.cancel_checkout = function(){
-        document.getElementsByClassName("pop-up")[0].style.display = "none";
-        document.getElementsByClassName("container")[0].classList.remove("blur");
-    }
-
-    this.checkout = function(){
-        var username = localStorage.getItem('c_username');
-        var name = document.getElementById("i_name").value;
-        var age = document.getElementById("i_age").value;
-        var shipping_address = document.getElementById("ta_shipping_address").value;
-        var billing_address = document.getElementById("ta_billing_address").value;
-
-        if(username==""){
-            alert("Username not found, check localstorage");
-        }
-
-        else if(name=="" || age=="" || shipping_address=="" || billing_address==""){
-            alert("Fill Up all the boxes");
-        }
-
-        else{
-            var a_sku_id = [];
-            var a_product_name = [];
-            var a_product_category = [];
-            var a_quantity = [];
-            var a_product_price = [];
-            self.cart().forEach(item=>{
-                console.log("SKU_ID: ", item.sku_id());
-                a_sku_id.push(item.sku_id());
-                a_product_name.push(item.product_name());
-                a_product_category.push(item.product_category());
-                a_quantity.push(item.quantity());
-                a_product_price.push(item.product_price());
-            })
-
-            console.log("SKU ID: ", a_sku_id);
-            console.log("Product Name: ", a_product_name);
-            console.log("Category Name: ", a_product_category);
-            console.log("Product Price: ", a_product_price);
-            console.log("Quantity: ", a_quantity);
-
-            parameters = "name="+encodeURIComponent(name)+
-                        "&username="+encodeURIComponent(username)+
-                        "&age="+encodeURIComponent(age)+
-                        "&shipping_address="+encodeURIComponent(shipping_address)+
-                        "&billing_address="+encodeURIComponent(billing_address)+
-                        "&a_sku_id="+encodeURIComponent(JSON.stringify(a_sku_id))+
-                        "&a_product_name="+encodeURIComponent(JSON.stringify(a_product_name))+
-                        "&a_product_category="+encodeURIComponent(JSON.stringify(a_product_category))+
-                        "&a_product_price="+encodeURIComponent(JSON.stringify(a_product_price))+
-                        "&a_quantity="+encodeURIComponent(JSON.stringify(a_quantity));
-                        
-
-            var xhr2 = new XMLHttpRequest();
-            xhr2.open("POST", "checkout.php", true);
-            xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr2.onload = function(){
-                if(xhr2.status == 200){
-                    var checkout_response = xhr2.responseText;
-                    if(checkout_response=="1"){
-                        alert("Check Out Successfull!");
-                        self.cancel_checkout();
-                    }
-                    else if(checkout_response=="0"){
-                        alert("Something went wrong");
-                    }
-                    else{
-                        alert(checkout_response);
-                    }
-                }
+    this.delete_cart_product = function(product){
+        var xhr13 = new XMLHttpRequest();
+        xhr13.open("POST", "delete_cart.php", true);
+        xhr13.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr13.onload = function(){
+            if(xhr13.status == 200){
+                var response13 = xhr13.responseText;
+                console.log("Response (Delete Product) : " + response13);
             }
-            xhr2.send(parameters);
         }
+        xhr13.send("sku_id="+encodeURIComponent(product.sku_id()));
+        self.cart.remove(product);
     }
+
+    this.view_checkout = function(){
+        if(self.cart().length === 0){
+            alert("Cart Empty, Nothing to Checkout!");
+        }
+        else{
+            window.location.href = "checkout.html";
+        }  
+    }
+
 
     // Fetching Initial Data
     var xhr1 = new XMLHttpRequest();
-    xhr1.open("GET", "fetch_initial.php", true);
+    xhr1.open("GET", "fetch_initial_customer.php", true);
     xhr1.onload = function(){
         if(xhr1.status==200){
             var response = JSON.parse(xhr1.responseText);
@@ -166,13 +150,32 @@ function KnockoutJS(){
     }
     xhr1.send();
 
+    if(window.XMLHttpRequest){
+        var xhr2 = new XMLHttpRequest();
+    }
+    else{
+        var xhr2 = new ActiveXObject("Microsoft.XMLHttp");
+    }
+    xhr2.open("POST", "fetch_initial_customer_cart.php", true);
+    xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr2.onload = function(){
+        if(xhr2.status==200){
+            var response = JSON.parse(xhr2.responseText);
+            for(let i=0;i<response.length;i++){
+                self.cart.push(new Product(
+                    response[i]['SKU_ID'],
+                    response[i]['Product_Name'],
+                    response[i]['Category_Name'],
+                    response[i]['Price'],
+                    response[i]['Quantity']
+                ))
+            }
+        }
+    }
+    xhr2.send();
+
 }
 
 ko.applyBindings(new KnockoutJS());
 
 
-
-// Delete LocalStorage Datas
-window.addEventListener("beforeunload", function () {
-    localStorage.clear()
-  });

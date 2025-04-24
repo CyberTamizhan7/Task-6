@@ -55,10 +55,39 @@
                         Category_ID JSON,
                         Quantity JSON,
                         Price JSON,
-                        Shipping_Address VARCHAR(255),
-                        Billing_Address VARCHAR(255),
                         Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         PRIMARY KEY (Order_ID));";
+
+    // Table : Carts
+    $sql_ct_carts = "CREATE TABLE IF NOT EXISTS Carts (
+                        Cart_ID VARCHAR(255) UNIQUE,
+                        Customer_ID VARCHAR(255),
+                        SKU_ID VARCHAR(255),
+                        Product_ID VARCHAR(255),
+                        Category_ID VARCHAR(255),
+                        Quantity INT,
+                        Price INT,
+                        Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        PRIMARY KEY (Cart_ID));";
+
+    // Table : Order_Address
+    $sql_ct_order_address = "CREATE TABLE IF NOT EXISTS Order_Address (
+                                Order_ID VARCHAR(255) UNIQUE,
+                                Shipping_Country VARCHAR(255),
+                                Shipping_State VARCHAR(255),
+                                Shipping_City VARCHAR(255),
+                                Shipping_Village VARCHAR(255),
+                                Shipping_Street VARCHAR(255),
+                                Shipping_House_No VARCHAR(255),
+                                Shipping_Pin_Code VARCHAR(255),
+                                Billing_Country VARCHAR(255),
+                                Billing_State VARCHAR(255),
+                                Billing_City VARCHAR(255),
+                                Billing_Village VARCHAR(255),
+                                Billing_Street VARCHAR(255),
+                                Billing_House_No VARCHAR(255),
+                                Billing_Pin_Code VARCHAR(255),
+                                Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
 
     // Table : Admin_Operations
     $sql_ct_admin_operations = "CREATE TABLE IF NOT EXISTS Admin_Operations (
@@ -66,6 +95,7 @@
                                     Operation_Mode VARCHAR(255),
                                     SKU_ID VARCHAR(255),
                                     Done_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
+
   
     // Execution
     if ($conn->query($sql_ct_admin) === FALSE){
@@ -90,6 +120,14 @@
 
     if ($conn->query($sql_ct_orders) === FALSE){
         echo "Error: Table 'Orders' Creation";
+    }
+
+    if ($conn->query($sql_ct_carts) === FALSE){
+        echo "Error: Table 'Carts' Creation";
+    }
+
+    if ($conn->query($sql_ct_order_address) === FALSE){
+        echo "Error: Table 'Order_Address' Creation";
     }
 
     if ($conn->query($sql_ct_admin_operations) === FALSE){

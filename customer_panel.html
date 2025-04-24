@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Document</title>
+    <title>Task 6</title>
     <link rel="stylesheet" href="style_customer_panel.css">
 </head>
 <body>
@@ -35,7 +35,11 @@
                         <td data-bind="text: product_category">Category</td>
                         <td data-bind="text: product_price">Price</td>
                         <td>
-                            <input type="number" data-bind="value: quantity, valueUpdate: 'input'" value=0 min=0 max=10>
+                            <div class="plus_minus">
+                                <button data-bind="click: $parent.decrease_quantity">-</button>
+                                <p data-bind="text: quantity"></p>
+                                <button data-bind="click: $parent.increase_quantity">+</button>
+                            </div>
                         </td>
                         <td>
                             <button data-bind="click: $parent.add_to_cart">Add To Cart</button>
@@ -56,6 +60,7 @@
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Sub Total</th>
+                        <th>DELETE</th>
                     </tr>
                 </thead>
                 <tbody data-bind="foreach: cart">
@@ -66,9 +71,16 @@
                         <td data-bind="text: product_category">Category</td>
                         <td data-bind="text: product_price">Price</td>
                         <td>
-                            <input type="number" data-bind="value: quantity, valueUpdate: 'input'" value=0 min=0 max=10>
+                            <div class="plus_minus">
+                                <button data-bind="click: $parent.decrease_quantity">-</button>
+                                <p data-bind="text: quantity"></p>
+                                <button data-bind="click: $parent.increase_quantity">+</button>
+                            </div>
                         </td>
                         <td data-bind="text: sub_total">Sub Total</td>
+                        <td>
+                            <button data-bind="click: $parent.delete_cart_product">DELETE</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -79,24 +91,6 @@
             <button id="b_checkout" data-bind="click: view_checkout">Check Out</button>
         </div>
 
-    </div>
-
-    <!--Pop Up-->
-    <div class="pop-up">
-        <form>
-            <p id="checkout_head">Checkout Form</p>
-            <label>Name</label>
-            <input id="i_name" name="i_name" placeholder = "Your Name" required>
-            <label>Age</label>
-            <input type="number" id="i_age" name="i_age" placeholder = "Your Age" required>
-            <label>Address</label>
-            <textarea id="ta_shipping_address" name="ta_shippingaddress" rows="4" placeholder="Shipping Address" required></textarea>
-            <textarea id="ta_billing_address" name="ta_billing_address" rows="4" placeholder="Billing Address" required></textarea>
-            <div class="cc_buttons">
-                <button id="cancel_checkout" type="button" data-bind="click: cancel_checkout">Cancel</button>
-                <button id="checkout" type="button" data-bind="click: checkout">Place Order</button>
-            </div>
-        </form>
     </div>
 
 

@@ -1,0 +1,77 @@
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.5fr 4fr 3fr;
+    margin: 2%;
+    gap: 4%;
+    border: 5px solid black;
+}
+
+.header{
+    background-color: yellow;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.header h1{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    font-family: consolas;
+    font-size: 35px;
+}
+
+.shipping_address{
+    background-color: blue;
+    font-family: consolas;
+    font-size: 20px;
+    padding: 2%;
+    margin-left: 5%;
+}
+
+.shipping_address input, .shipping_address select{
+    font-family: consolas;
+    font-size: 20px
+}
+
+.billing_address{
+    background-color: red;
+    font-family: consolas;
+    font-size: 20px;
+    padding: 2%;
+    margin-right: 5%;
+}
+
+.billing_address input, .billing_address select{
+    font-family: consolas;
+    font-size: 20px;    
+}
+
+.cart{
+    background-color: green;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+}
+
+.entry{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 2%;
+}
+
+.same_row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+#s_head{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: consolas;
+}

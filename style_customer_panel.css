@@ -153,6 +153,12 @@ td button:active{
     font-weight: bold;
 }
 
+.plus_minus{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
 .blur{
     filter: blur(10px);
 }
