@@ -9,9 +9,10 @@
         $result = $conn->query($sql_s_c_username);
         $row = $result->fetch_assoc();
         $customer_id = $row['Customer_ID']; //C002
-        $sql_s_carts = "SELECT SKU_ID, Product_ID, Category_ID, Price, Quantity 
+        $sql_s_carts = "SELECT SKU_ID, Product_ID, Category_ID, Price, SUM(Quantity) AS Total_Quantity 
                         FROM Carts
-                        WHERE Customer_ID = '{$customer_id}';";
+                        WHERE Customer_ID = '{$customer_id}'
+                        GROUP BY Product_ID;";
         $carts = [];
         $result2 = $conn->query($sql_s_carts);
         if($result2->num_rows>0){

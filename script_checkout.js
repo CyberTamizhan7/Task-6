@@ -47,6 +47,10 @@ function KnockoutJS(){
         self.carts.remove(product);
     }
 
+    this.back = function(){
+        window.location.href = "customer_panel.html";
+    }
+
     this.place_order = function(){
 
         var arr = ko.toJS(self.carts);
@@ -160,7 +164,7 @@ function KnockoutJS(){
                     response[i]['Product_Name'],
                     response[i]['Category_Name'],
                     response[i]['Price'],
-                    response[i]['Quantity']
+                    response[i]['Total_Quantity']
                 ))
             }
         }

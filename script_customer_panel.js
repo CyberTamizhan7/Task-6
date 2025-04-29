@@ -43,7 +43,7 @@ function KnockoutJS(){
             alert("Invalid: Max Product Stock Count Reached (" + max_product.toString() + ")");
         }
         else{
-            product.quantity(product.quantity()+1);
+            product.quantity(parseInt(product.quantity())+1);
         }
     }
 
@@ -167,7 +167,7 @@ function KnockoutJS(){
                     response[i]['Product_Name'],
                     response[i]['Category_Name'],
                     response[i]['Price'],
-                    response[i]['Quantity']
+                    response[i]['Total_Quantity']
                 ))
             }
         }

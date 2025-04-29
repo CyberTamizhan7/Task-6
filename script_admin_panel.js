@@ -111,11 +111,28 @@ function KnockoutJS(){
     xhr7.onload = function(){
         if(xhr7.status == 200){
             let data = JSON.parse(xhr7.responseText);
+            console.log("xhr7 Response : ");
+            console.log(data);
+            self.orders.removeAll();
             for(let i=0;i<data.length;i++){
+                var shipping_address = data[i]['Shipping_Country'] + ", " +
+                                       data[i]['Shipping_State'] + ", " +
+                                       data[i]['Shipping_City'] + ", " +
+                                       data[i]['Shipping_Village'] + ", " +
+                                       data[i]['Shipping_Street'] + ", " +
+                                       data[i]['Shipping_House_No'] + ", " +
+                                       data[i]['Shipping_Pin_Code'];
+                var billing_address = data[i]['Billing_Country'] + ", " +
+                                      data[i]['Billing_State'] + ", " +
+                                      data[i]['Billing_City'] + ", " +
+                                      data[i]['Billing_Village'] + ", " +
+                                      data[i]['Billing_Street'] + ", " +
+                                      data[i]['Billing_House_No'] + ", " +
+                                      data[i]['Billing_Pin_Code']; 
                 self.orders.push(new Order(
                     data[i]['Order_ID'],
                     data[i]['Customer_ID'],
-                    data[i]['Name'],
+                    data[i]['Name'],    
                     data[i]['Username'],
                     data[i]['SKU_ID'],
                     data[i]['Product_ID'],
@@ -123,8 +140,8 @@ function KnockoutJS(){
                     data[i]['Quantity'],
                     data[i]['Price'],
                     data[i]['Created_At'],
-                    data[i]['Shipping_Address'],
-                    data[i]['Billing_Address']
+                    shipping_address,
+                    billing_address
                 ));
             }
         }
