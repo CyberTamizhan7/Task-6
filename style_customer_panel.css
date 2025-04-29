@@ -198,6 +198,19 @@ td button:active{
     cursor: pointer;
 }
 
+#i_cart_icon{
+    height: 40px;
+    position: absolute;
+    padding-top: 20px;
+    padding-right: 150px;
+    right: 0;
+    top: 0;
+}
+
+#i_cart_icon:hover{
+    cursor: pointer;
+}
+
 #li_logout:hover{
     cursor:pointer;
 }

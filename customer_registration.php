@@ -24,10 +24,11 @@
             $row = $result->fetch_assoc();
             $next_customer_id = $row['n_customer'] + 1;
             $customer_id = 'C'.str_pad($next_customer_id, 3, '0', STR_PAD_LEFT);
+            $hashedPassword = password_hash($c_password, PASSWORD_DEFAULT);
             $sql_i_customer = "INSERT INTO Customer (Customer_ID, Username, Password)
                                     VALUES(?, ?, ?);";
             $stmt = $conn->prepare($sql_i_customer);
-            $stmt->bind_param("sss", $customer_id, $c_username, $c_password);
+            $stmt->bind_param("sss", $customer_id, $c_username, $hashedPassword);
             $stmt->execute();
 
             $sql_i_customer_info = "INSERT INTO Customer_Info 

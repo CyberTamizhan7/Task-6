@@ -1,22 +1,12 @@
 <html>
-<head>
-    <title>Task 6</title>
-    <link rel="stylesheet" href="style_customer_panel.css">
-</head>
-<body>
-
-    <h1 id="head1">Quick<strong id="head2">Buy</strong></h1>
-    <img data-bind="click: view_cart" id="i_cart_icon" src="Assets/Cart_Icon.png" alt="Cart Icon">
-    <img data-bind="click: view_profile" id="i_profile_icon" src="Assets/Profile_Icon.png" alt="Profile Icon">
-    <ul id="l_profile_view">
-        <li>Username : <strong data-bind="text: c_username">Dummy</strong></li>
-        <li data-bind="click: logout" id="li_logout">Logout</li>
-    </ul>
-
-    <div class="container">
-        <div class="d_product_table">
+    <head>
+        <title>Task 6</title>
+        <link rel="stylesheet" href="style_customer_panel.css">
+    </head>
+    <body>
+        <div class="d_cart_table">
             <table border="1">
-                <caption>Products Table</caption>
+                <caption>Cart Table</caption>
                 <thead>
                     <tr>
                         <th>SNo</th>
@@ -25,10 +15,11 @@
                         <th>Category</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Add To Cart</th>
+                        <th>Sub Total</th>
+                        <th>DELETE</th>
                     </tr>
                 </thead>
-                <tbody data-bind="foreach: products">
+                <tbody data-bind="foreach: cart">
                     <tr>
                         <td data-bind="text: $index()+1">Index</td>
                         <td data-bind="text: sku_id">SKU ID</td>
@@ -42,18 +33,21 @@
                                 <button data-bind="click: $parent.increase_quantity">+</button>
                             </div>
                         </td>
+                        <td data-bind="text: sub_total">Sub Total</td>
                         <td>
-                            <button data-bind="click: $parent.add_to_cart">Add To Cart</button>
+                            <button data-bind="click: $parent.delete_cart_product">DELETE</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
-    <script src="script_customer_panel.js"></script>
-    
-</body>
+        <div class=".d_execute">
+            <p id="l_total">Total : <strong class="total">$</strong><strong class="total" data-bind="text: total">Total</strong></p>
+            <button id="b_checkout" data-bind="click: view_checkout">Check Out</button>
+        </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+        <script src="script_customer_panel.js"></script>
+    </body>
 </html>

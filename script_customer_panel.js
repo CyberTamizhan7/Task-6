@@ -14,7 +14,6 @@ function KnockoutJS(){
     }
 
     const self = this;
-    var username = localStorage.getItem('c_username');
     let clickCounter = 0;
 
     this.products = ko.observableArray([]);
@@ -47,9 +46,13 @@ function KnockoutJS(){
         }
     }
 
+    this.view_cart = function(){
+        window.location.href = "cart_page.html";
+    }
+
     this.add_to_cart = function(product){
         if(product.quantity() == 0){
-            alert("Error: Cannot Add 0 Stock to Cart!");
+            alert("Error: Cannot Add 0 Quantity Stock to Cart!");
         }
         else{
             let exists = self.cart().find(p=>p.sku_id() === product.sku_id());
@@ -80,6 +83,18 @@ function KnockoutJS(){
         }
     };
 
+    function getCookie(name){
+        const cookies = document.cookie.split("; ");
+        for (let cookie of cookies){
+            const [key, value] = cookie.split("=");
+            if(key===name){
+                return decodeURIComponent(value);
+            }
+        }
+        return null;
+    }
+
+    const username = getCookie("c_username");
     this.c_username = ko.observable(username);
 
     var xhr10 = new XMLHttpRequest();

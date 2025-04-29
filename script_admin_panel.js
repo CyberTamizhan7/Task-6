@@ -168,7 +168,18 @@ function KnockoutJS(){
     }
     xhr9.send("code="+encodeURIComponent('A'));
 
-    var a_username = localStorage.getItem('a_username');
+    function getCookie(name){
+        const cookies = document.cookie.split("; ");
+        for (let cookie of cookies){
+            const [key, value] = cookie.split("=");
+            if(key===name){
+                return decodeURIComponent(value);
+            }
+        }
+        return null;
+    }
+
+    var a_username = getCookie("a_username");
     this.a_username = ko.observable(a_username);
 
     var xhr11 = new XMLHttpRequest();
@@ -402,7 +413,16 @@ function return_n_orders(){
         if(xhr1.status == 200){
             let response1 = xhr1.responseText;
             console.log(response1);
-            document.getElementById("n_orders").innerText = response1;
+            let target = response1;
+            let count = 0;
+            let counter = document.getElementById("n_orders");
+            let interval = setInterval(()=>{
+                count++;
+                counter.innerText = count;
+                if(count==target){
+                    clearInterval(interval);
+                }
+            },200);
         }
     }
     xhr1.send("n="+encodeURIComponent(3));
@@ -416,7 +436,16 @@ function return_n_products(){
         if(xhr1.status == 200){
             let response1 = xhr1.responseText;
             console.log(response1);
-            document.getElementById("n_products").innerText = response1;
+            let target = response1;
+            let count = 0;
+            let counter = document.getElementById("n_products")
+            let interval = setInterval(()=>{
+                count++;
+                counter.innerText = count;
+                if(count==target){
+                    clearInterval(interval);
+                }
+            },32);
         }
     }
     xhr1.send("n="+encodeURIComponent(4));
@@ -430,7 +459,16 @@ function return_n_customers(){
         if(xhr1.status == 200){
             let response1 = xhr1.responseText;
             console.log(response1);
-            document.getElementById("n_customers").innerText = response1;
+            let target = response1;
+            let count = 0;
+            let counter = document.getElementById("n_customers");
+            let interval = setInterval(()=>{
+                count++;
+                counter.innerText = count;
+                if(count==response1){
+                    clearInterval(interval);
+                }
+            },200);
         }
     }
     xhr1.send("n="+encodeURIComponent(2));
@@ -444,7 +482,16 @@ function return_n_admins(){
         if(xhr1.status == 200){
             let response1 = xhr1.responseText;
             console.log(response1);
-            document.getElementById("n_admins").innerText = response1;
+            let target = response1;
+            let count = 0;
+            let counter = document.getElementById("n_admins");
+            let interval = setInterval(()=>{
+                count++;
+                counter.innerText = count;
+                if(count==target){
+                    clearInterval(interval);
+                }
+            },500);
         }
     }
     xhr1.send("n="+encodeURIComponent(1));

@@ -489,3 +489,7 @@ body{
 #delete_product:active, #edit_product:active{
     transform: scale(0.7);
 }
+
+#n_customers, #n_products, #n_orders, #n_admins{
+    font-size: 32px;
+}

@@ -19,6 +19,7 @@
             if($result2->num_rows>0){
                 $_SESSION['username'] = $username;
                 $_SESSION['loggedIn'] = true;
+                setcookie("a_username", $username, time()+86400, "/");
                 echo "1";
             }
             else{
